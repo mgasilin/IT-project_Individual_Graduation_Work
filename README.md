@@ -1,5 +1,5 @@
 # IT-project_Individual_Graduation_Work
-Репозиторий для Ивр
+Репозиторий для ИВР
 
 Проблемное поле:
 
