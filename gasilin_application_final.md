@@ -1,5 +1,5 @@
-# Гасилин Максим - "Карта мероприятий"
-## Группа: 10-И-1
+# Гасилин Максим - "Event Navigator"
+## Группа: 11-И-1
 ## Электронная почта: maksim.gasilin05@gmail.com
 ## VK: https://vk.com/maksim.gasilin
 
