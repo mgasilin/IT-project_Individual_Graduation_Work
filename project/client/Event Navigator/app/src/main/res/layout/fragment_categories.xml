@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:background="@drawable/ic_light_theme_background"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".hub_activity_fragments.CategoriesFragment">
+
+        <CheckBox
+            android:textSize="18sp"
+            android:id="@+id/isStreet_criterion"
+            android:textColor="@color/text_color"
+            android:layout_width="match_parent"
+            android:layout_margin="10dp"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:drawableRight="@drawable/checkbox"
+            android:text="Уличное мероприятие"
+            />
+        <CheckBox
+            android:textSize="18sp"
+            android:id="@+id/isGroup_criterion"
+            android:textColor="@color/text_color"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:button="@null"
+            android:drawableRight="@drawable/checkbox"
+            android:text="Групповое мероприятие"
+            />
+        <CheckBox
+            android:textSize="18sp"
+            android:id="@+id/isFamily_criterion"
+            android:textColor="@color/text_color"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:drawableRight="@drawable/checkbox"
+            android:text="Мероприятие для всей семьи"
+            />
+        <CheckBox
+            android:textSize="18sp"
+            android:id="@+id/isFree_criterion"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:textColor="@color/text_color"
+            android:drawableRight="@drawable/checkbox"
+            android:text="Бесплатное мероприятие"
+            />
+        <CheckBox
+            android:textSize="18sp"
+            android:layout_margin="10dp"
+            android:id="@+id/isCovid_criterion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color"
+            android:button="@null"
+            android:drawableRight="@drawable/checkbox"
+            android:text="Мероприятие с ковидными ограничениями"
+            />
+        <CheckBox
+            android:textSize="18sp"
+            android:layout_margin="10dp"
+            android:id="@+id/isRegister_criterion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:textColor="@color/text_color"
+            android:drawableRight="@drawable/checkbox"
+            android:text="Мероприятие с предварительной регистрацией"
+            />
+        <CheckBox
+            android:textSize="18sp"
+            android:layout_margin="10dp"
+            android:id="@+id/isSport_criterion"
+            android:layout_width="match_parent"
+            android:textColor="@color/text_color"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:drawableRight="@drawable/checkbox"
+            android:text="Спротивное мероприятие"
+            />
+        <CheckBox
+            android:textSize="18sp"
+            android:layout_margin="10dp"
+            android:id="@+id/isRestricted_criterion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:textColor="@color/text_color"
+            android:drawableRight="@drawable/checkbox"
+            android:text="Мероприятие с ограничениями по возврасту"
+            />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/reference_point"
+                android:layout_width="0dp"
+                android:textColor="@color/text_color"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:textSize="18sp"
+                android:layout_height="wrap_content"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_margin="10dp"
+                android:textSize="17sp"
+                android:text="задать место"
+                android:textColor="@color/dark_text_color"
+                android:background="@drawable/ic_light_teme_light_blue_rect"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:id="@+id/set_reference_point"
+                />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_light_theme_dark_blue_rectangle"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_margin="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/search_len"
+        android:textSize="20sp"
+        android:textColor="@color/text_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Расстояние для поиска: м"/>
+
+    <SeekBar
+        app:layout_constraintTop_toBottomOf="@+id/search_len"
+        android:id="@+id/search_scrollView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp" />
+
+    <CheckBox
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@+id/search_scrollView"
+        android:id="@+id/searchByLen"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/search_applyCategories"
+        app:layout_constraintHorizontal_bias="0"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_margin="5dp"
+        android:textColor="@color/text_color"
+        android:layout_weight="1"
+        android:button="@null"
+        android:drawableRight="@drawable/checkbox"
+        android:text="Поиск по удаленности" />
+
+    <CheckBox
+        android:textSize="18sp"
+        android:textColor="@color/text_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_scrollView"
+        app:layout_constraintStart_toEndOf="@+id/searchByLen"
+        app:layout_constraintHorizontal_bias="1"
+        android:id="@+id/search_applyCategories"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_margin="5dp"
+        android:layout_weight="1"
+        android:button="@null"
+        android:drawableRight="@drawable/checkbox"
+        android:gravity="center_vertical"
+        android:text="Учитывать категории" />
+
+    <TextView
+        android:id="@+id/temporary_text"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchByLen"
+        android:layout_height="0dp"/>
+
+    <androidx.constraintlayout.widget.Barrier
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:barrierDirection="bottom"
+        android:id="@+id/mapFragment_barrier_bottom"
+        android:layout_margin="5dp"
+        app:constraint_referenced_ids="temporary_text,searchByLen, search_applyCategories"
+        />
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/mapFragment_map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mapFragment_barrier_bottom"
+        tools:context=".hub_activity_fragments.MapFragment" />
+
+    <FrameLayout
+        android:id="@+id/event_showcase_maps"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="2022-13-05--event" author="mgasilin">
+
+        <!-- Проверяем нет ли уже таблицы с таким названием -->
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="events"/>
+            </not>
+        </preConditions>
+
+        <!-- Создаем таблицу -->
+        <createTable tableName="events">
+
+            <!-- Описываем колонки -->
+            <column name="id"
+                    type="NUMERIC(19,0)"
+                    autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="description" type="VARCHAR(300)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="date" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="place" type="VARCHAR(300)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="owner" type="NUMERIC(19,0)">
+                <constraints nullable="false" foreignKeyName="fk_user_id"  references="users(id)"/>
+            </column>
+            
+            <column name="street_event" type="NUMERIC">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="group_event" type="NUMERIC">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="free_event" type="NUMERIC">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="family_event" type="NUMERIC">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="sport_event" type="NUMERIC">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="event_with_covid_restrictions" type="NUMERIC">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="event_with_age_restrictions" type="NUMERIC">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="event_with_registration" type="NUMERIC">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="x_coord" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="y_coord" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="registration" type="NUMERIC">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="lim" type="NUMERIC">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="has_limit" type="NUMERIC">
+                <constraints nullable="false"/>
+            </column>
+
+
+        </createTable>
+
+    </changeSet>
+
+
+</databaseChangeLog>

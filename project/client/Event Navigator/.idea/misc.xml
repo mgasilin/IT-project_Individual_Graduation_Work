@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/test/Event Navigator/app/src/main/res/drawable/ic_1.xml" value="0.177" />
+        <entry key="..\:/test/Event Navigator/app/src/main/res/drawable/ic_2.xml" value="0.177" />
+        <entry key="..\:/test/Event Navigator/app/src/main/res/drawable/ic_dark_rect.xml" value="0.177" />
+        <entry key="..\:/test/Event Navigator/app/src/main/res/drawable/ic_dbrect.xml" value="0.177" />
+        <entry key="..\:/test/Event Navigator/app/src/main/res/drawable/ic_launcher_background.xml" value="0.20833333333333334" />
+        <entry key="..\:/test/Event Navigator/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.20833333333333334" />
+        <entry key="..\:/test/Event Navigator/app/src/main/res/drawable/ic_map.xml" value="0.1905" />
+        <entry key="..\:/test/Event Navigator/app/src/main/res/layout/activity_event_showcase.xml" value="0.25" />
+        <entry key="..\:/test/Event Navigator/app/src/main/res/layout/activity_get_place.xml" value="0.25" />
+        <entry key="..\:/test/Event Navigator/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/test/Event Navigator/app/src/main/res/layout/activity_new_event.xml" value="0.25" />
+        <entry key="..\:/test/Event Navigator/app/src/main/res/layout/activity_register.xml" value="0.25" />
+        <entry key="..\:/test/Event Navigator/app/src/main/res/layout/fragment_blank.xml" value="0.25" />
+        <entry key="..\:/test/Event Navigator/app/src/main/res/layout/fragment_categories.xml" value="0.25" />
+        <entry key="..\:/test/Event Navigator/app/src/main/res/layout/fragment_get_position.xml" value="0.25" />
+        <entry key="..\:/test/Event Navigator/app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="..\:/test/Event Navigator/app/src/main/res/layout/fragment_maps.xml" value="0.25" />
+        <entry key="..\:/test/Event Navigator/app/src/main/res/layout/fragment_register.xml" value="0.25" />
+        <entry key="..\:/test/Event Navigator/app/src/main/res/layout/fragment_registration.xml" value="0.25" />
+        <entry key="..\:/test/Event Navigator/app/src/main/res/layout/fragment_registration_owner.xml" value="0.264" />
+        <entry key="..\:/test/Event Navigator/app/src/main/res/layout/fragment_search.xml" value="0.25" />
+        <entry key="..\:/test/Event Navigator/app/src/main/res/layout/fragment_show_case.xml" value="0.25" />
+        <entry key="..\:/test/Event Navigator/app/src/main/res/layout/fragment_show_case_map.xml" value="0.25" />
+        <entry key="..\:/test/Event Navigator/app/src/main/res/layout/fragment_showcase_comments.xml" value="0.25" />
+        <entry key="..\:/test/Event Navigator/app/src/main/res/layout/hub_activity.xml" value="0.1" />
+        <entry key="..\:/test/Event Navigator/app/src/main/res/layout/item_comment.xml" value="0.25" />
+        <entry key="..\:/test/Event Navigator/app/src/main/res/layout/item_usual_event.xml" value="0.25" />
+        <entry key="..\:/test/Event Navigator/app/src/main/res/menu/hub_menu.xml" value="0.25" />
+        <entry key="..\:/test/Event Navigator/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.20833333333333334" />
+        <entry key="..\:/test/test/app/src/main/res/drawable-v24/ic_launcher_background_round.xml" value="0.14583333333333334" />
+        <entry key="..\:/test/test/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.26205128205128203" />
+        <entry key="..\:/test/test/app/src/main/res/drawable/checkbox.xml" value="0.26614583333333336" />
+        <entry key="..\:/test/test/app/src/main/res/drawable/ic_1.xml" value="0.262037037037037" />
+        <entry key="..\:/test/test/app/src/main/res/drawable/ic_2.xml" value="0.262037037037037" />
+        <entry key="..\:/test/test/app/src/main/res/drawable/ic_bg_rv.xml" value="0.26614583333333336" />
+        <entry key="..\:/test/test/app/src/main/res/drawable/ic_categories.xml" value="0.14322916666666666" />
+        <entry key="..\:/test/test/app/src/main/res/drawable/ic_chechbox_cchecked.xml" value="0.14322916666666666" />
+        <entry key="..\:/test/test/app/src/main/res/drawable/ic_comment_rect.xml" value="0.14322916666666666" />
+        <entry key="..\:/test/test/app/src/main/res/drawable/ic_dbrect.xml" value="0.14322916666666666" />
+        <entry key="..\:/test/test/app/src/main/res/drawable/ic_ellipse_2.xml" value="0.14583333333333334" />
+        <entry key="..\:/test/test/app/src/main/res/drawable/ic_exlaim_mark.xml" value="0.26614583333333336" />
+        <entry key="..\:/test/test/app/src/main/res/drawable/ic_group_1.xml" value="0.24537037037037038" />
+        <entry key="..\:/test/test/app/src/main/res/drawable/ic_home.xml" value="0.14322916666666666" />
+        <entry key="..\:/test/test/app/src/main/res/drawable/ic_launcher_background.xml" value="0.24537037037037038" />
+        <entry key="..\:/test/test/app/src/main/res/drawable/ic_light_teme_light_blue_rect.xml" value="0.26614583333333336" />
+        <entry key="..\:/test/test/app/src/main/res/drawable/ic_light_teme_light_blue_rect_huge.xml" value="0.26614583333333336" />
+        <entry key="..\:/test/test/app/src/main/res/drawable/ic_light_theme_background.xml" value="0.26205128205128203" />
+        <entry key="..\:/test/test/app/src/main/res/drawable/ic_light_theme_checkbox.xml" value="0.14322916666666666" />
+        <entry key="..\:/test/test/app/src/main/res/drawable/ic_light_theme_dark_blue_rectangle.xml" value="0.26614583333333336" />
+        <entry key="..\:/test/test/app/src/main/res/drawable/ic_light_theme_light_blue_rect_huge.xml" value="0.26614583333333336" />
+        <entry key="..\:/test/test/app/src/main/res/drawable/ic_light_theme_mid_blue_rectangle.xml" value="0.26614583333333336" />
+        <entry key="..\:/test/test/app/src/main/res/drawable/ic_map.xml" value="0.26614583333333336" />
+        <entry key="..\:/test/test/app/src/main/res/drawable/ic_rectangle_1.xml" value="0.24537037037037038" />
+        <entry key="..\:/test/test/app/src/main/res/drawable/ic_round_bg_for_rv.xml" value="0.26614583333333336" />
+        <entry key="..\:/test/test/app/src/main/res/drawable/ic_search.xml" value="0.14322916666666666" />
+        <entry key="..\:/test/test/app/src/main/res/drawable/ic_search_text.xml" value="0.1109375" />
+        <entry key="..\:/test/test/app/src/main/res/drawable/ic_textrect.xml" value="0.26614583333333336" />
+        <entry key="..\:/test/test/app/src/main/res/layout-land/activity_event_show_case.xml" value="0.21164021164021163" />
+        <entry key="..\:/test/test/app/src/main/res/layout-land/activity_get_place.xml" value="0.21164021164021163" />
+        <entry key="..\:/test/test/app/src/main/res/layout-land/activity_main.xml" value="0.21164021164021163" />
+        <entry key="..\:/test/test/app/src/main/res/layout-land/activity_new_event.xml" value="0.21164021164021163" />
+        <entry key="..\:/test/test/app/src/main/res/layout-land/activity_register.xml" value="0.19895833333333332" />
+        <entry key="..\:/test/test/app/src/main/res/layout-land/fragment_categories.xml" value="0.21164021164021163" />
+        <entry key="..\:/test/test/app/src/main/res/layout-land/fragment_get_position.xml" value="0.21164021164021163" />
+        <entry key="..\:/test/test/app/src/main/res/layout-land/fragment_home.xml" value="0.21164021164021163" />
+        <entry key="..\:/test/test/app/src/main/res/layout-land/fragment_maps.xml" value="0.21164021164021163" />
+        <entry key="..\:/test/test/app/src/main/res/layout-land/fragment_search.xml" value="0.21164021164021163" />
+        <entry key="..\:/test/test/app/src/main/res/layout-land/fragment_show_case.xml" value="0.21164021164021163" />
+        <entry key="..\:/test/test/app/src/main/res/layout-land/fragment_show_case_map.xml" value="0.21164021164021163" />
+        <entry key="..\:/test/test/app/src/main/res/layout-land/hub_activity.xml" value="0.21164021164021163" />
+        <entry key="..\:/test/test/app/src/main/res/layout-land/item_comment.xml" value="0.21164021164021163" />
+        <entry key="..\:/test/test/app/src/main/res/layout-land/item_usual_event.xml" value="0.21164021164021163" />
+        <entry key="..\:/test/test/app/src/main/res/layout/activity_adress.xml" value="0.25" />
+        <entry key="..\:/test/test/app/src/main/res/layout/activity_event_show_case.xml" value="0.19238900634249473" />
+        <entry key="..\:/test/test/app/src/main/res/layout/activity_event_showcase.xml" value="0.25" />
+        <entry key="..\:/test/test/app/src/main/res/layout/activity_get_place.xml" value="0.20244565217391305" />
+        <entry key="..\:/test/test/app/src/main/res/layout/activity_main.xml" value="0.4" />
+        <entry key="..\:/test/test/app/src/main/res/layout/activity_main2.xml" value="0.12708333333333333" />
+        <entry key="..\:/test/test/app/src/main/res/layout/activity_new_event.xml" value="0.2222222222222222" />
+        <entry key="..\:/test/test/app/src/main/res/layout/activity_register.xml" value="0.4" />
+        <entry key="..\:/test/test/app/src/main/res/layout/fragment_categories.xml" value="0.264" />
+        <entry key="..\:/test/test/app/src/main/res/layout/fragment_get_position.xml" value="0.11614583333333334" />
+        <entry key="..\:/test/test/app/src/main/res/layout/fragment_home.xml" value="0.17527173913043478" />
+        <entry key="..\:/test/test/app/src/main/res/layout/fragment_home2.xml" value="0.12708333333333333" />
+        <entry key="..\:/test/test/app/src/main/res/layout/fragment_map.xml" value="0.25" />
+        <entry key="..\:/test/test/app/src/main/res/layout/fragment_maps.xml" value="0.23046875" />
+        <entry key="..\:/test/test/app/src/main/res/layout/fragment_profile.xml" value="0.25" />
+        <entry key="..\:/test/test/app/src/main/res/layout/fragment_search.xml" value="0.176" />
+        <entry key="..\:/test/test/app/src/main/res/layout/fragment_settings.xml" value="0.12708333333333333" />
+        <entry key="..\:/test/test/app/src/main/res/layout/fragment_show_case.xml" value="0.2" />
+        <entry key="..\:/test/test/app/src/main/res/layout/fragment_show_case_map.xml" value="0.10833333333333334" />
+        <entry key="..\:/test/test/app/src/main/res/layout/fragment_showcase_comments.xml" value="0.25" />
+        <entry key="..\:/test/test/app/src/main/res/layout/fragment_showcase_info.xml" value="0.1296875" />
+        <entry key="..\:/test/test/app/src/main/res/layout/hub_activity.xml" value="0.15760869565217392" />
+        <entry key="..\:/test/test/app/src/main/res/layout/item_comment.xml" value="0.25" />
+        <entry key="..\:/test/test/app/src/main/res/layout/item_event.xml" value="0.12708333333333333" />
+        <entry key="..\:/test/test/app/src/main/res/layout/item_usua_levent.xml" value="0.25" />
+        <entry key="..\:/test/test/app/src/main/res/layout/item_usual_event.xml" value="0.20697463768115942" />
+        <entry key="..\:/test/test/app/src/main/res/menu/hub_menu.xml" value="0.12708333333333333" />
+        <entry key="..\:/test/test/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.24537037037037038" />
+        <entry key="..\:/test/test/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.24537037037037038" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

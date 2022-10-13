@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/main_home"
+        android:icon="@drawable/ic_home"
+        app:showAsAction="withText|always"
+        android:title="Мои мероприятия" />
+
+    <item
+        android:id="@+id/categories"
+        android:icon="@drawable/ic_categories"
+        app:showAsAction="withText|always"
+        android:title="Категории" />
+
+    <item
+        android:id="@+id/search"
+        android:icon="@drawable/ic_search"
+        app:showAsAction="withText|always"
+        android:title="Поиск" />
+
+    <item
+        android:id="@+id/map_view"
+        android:icon="@drawable/ic_map"
+        android:title="Карта"
+        app:showAsAction="withText|always"/>
+
+    <item
+        android:id="@+id/reg_view"
+        android:icon="@drawable/ic_tick"
+        android:title="Запись"
+        app:showAsAction="withText|always"/>
+</menu>

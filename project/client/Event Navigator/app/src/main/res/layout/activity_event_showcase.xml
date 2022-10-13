@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_light_theme_background"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:background="@drawable/ic_light_rect"
+        android:layout_margin="10dp"
+        android:textSize="18sp"
+        android:textColor="@color/dark_text_color"
+        android:id="@+id/info_showcase"
+        android:text="Инфромация"
+        app:layout_constraintEnd_toStartOf="@+id/comments_showcase"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:background="@drawable/ic_dark_rect"
+        android:layout_margin="10dp"
+        android:id="@+id/comments_showcase"
+        android:textSize="18sp"
+        android:textColor="@color/dark_text_color"
+        android:text="Комментарии"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/register_for_event"
+        android:layout_width="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/info_showcase"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:background="@drawable/ic_dark_rect"
+        android:layout_margin="10dp"
+        android:id="@+id/register_for_event"
+        android:textSize="18sp"
+        android:textColor="@color/dark_text_color"
+        android:text="Запись"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/comments_showcase"
+        android:layout_height="wrap_content"/>
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/fragment_showcase"
+        app:layout_constraintTop_toBottomOf="@id/info_showcase"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@id/backButton"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Назад"
+        android:background="@drawable/ic_light_teme_light_blue_rect"
+        android:layout_margin="10dp"
+        android:id="@+id/backButton"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

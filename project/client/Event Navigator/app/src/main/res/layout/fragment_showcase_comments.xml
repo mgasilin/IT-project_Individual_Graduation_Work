@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/ic_light_theme_background"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".event_showcase.ShowcaseComments">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/dark_text_color"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:layout_margin="10dp"
+        android:text="Комментарии"
+        app:layout_constraintBottom_toTopOf="@+id/comment_info_top2"
+        android:id="@+id/comment_info_top1"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:layout_marginStart="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/new_comment"
+        android:layout_marginTop="10dp"
+        android:textSize="15sp"
+        android:text="Добавить комментарий"
+        android:textColor="@color/dark_text_color"
+        android:id="@+id/comment_info_top2"
+        app:layout_constraintTop_toBottomOf="@id/comment_info_top1"/>
+
+    <EditText
+        android:layout_width="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:layout_constraintEnd_toStartOf="@+id/send_new_comment"
+        android:textSize="20sp"
+        android:textColorHint="@color/dark_text_color"
+        android:layout_margin="10dp"
+        android:hint="Введите текст комментария"
+        android:id="@+id/new_comment"
+        app:layout_constraintBottom_toBottomOf="@id/send_new_comment"
+        app:layout_constraintTop_toBottomOf="@id/comment_info_top2"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:background="@drawable/ic_light_theme_light_blue_rect_huge"
+        android:id="@+id/send_new_comment"
+        android:layout_margin="10dp"
+        android:text="Отправить"
+        app:layout_constraintStart_toEndOf="@id/new_comment"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/comment_info_top2"
+        app:layout_constraintBottom_toBottomOf="@+id/new_comment"
+        android:layout_height="wrap_content"/>
+
+    <androidx.constraintlayout.widget.Barrier
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:barrierDirection="bottom"
+        android:id="@+id/showcase_barrier"
+        app:constraint_referenced_ids="new_comment, send_new_comment"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/showcase_barrier"
+        android:id="@+id/comment_info_top3"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="10dp"
+        android:textColor="@color/dark_text_color"
+        android:textSize="18sp"
+        android:text="Список комментариев"
+        app:layout_constraintEnd_toStartOf="@+id/update_recycler"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintBottom_toBottomOf="@id/update_recycler" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="0dp"
+        android:id="@+id/update_recycler"
+        android:layout_margin="10dp"
+        android:text="Обновить список"
+        android:background="@drawable/ic_light_theme_light_blue_rect_huge"
+        android:textSize="13sp"
+        app:layout_constraintStart_toEndOf="@id/comment_info_top3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/showcase_barrier"
+        android:layout_height="wrap_content"/>
+    <androidx.constraintlayout.widget.Barrier
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:barrierDirection="bottom"
+        android:id="@+id/showcase_barrier2"
+        app:constraint_referenced_ids="comment_info_top3,update_recycler"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/showcase_barrier2"
+        android:layout_margin="10dp"
+        android:id="@+id/showcase_comments"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:id="@+id/emptyCommentList"
+        app:layout_constraintTop_toBottomOf="@id/showcase_barrier2"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/black"
+        android:text="Пока нет комментариев. Станьте первым!"
+        android:textStyle="bold"
+        android:textSize="16dp"
+        android:gravity="center"
+        android:visibility="gone"
+        android:layout_height="wrap_content"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
