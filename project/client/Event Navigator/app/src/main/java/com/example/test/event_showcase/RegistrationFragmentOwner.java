@@ -31,6 +31,7 @@ public class RegistrationFragmentOwner extends Fragment {
     private AppCompatButton back,save,refresh;
     private String eventInfo;
     private TextView info;
+    private boolean isEditing = false;
     public RegistrationFragmentOwner() {}
 
     /* Методы update отвечают за обработку ответа от сервера: записывают информацию в поля класса,
@@ -55,7 +56,9 @@ public class RegistrationFragmentOwner extends Fragment {
         limit[0]=event.getLimit();
         limit[1]=event.getLimit();
         if (register !=null){
-            register.setChecked(event.isRegister());
+            register.setChecked(has_register[0]);
+            has_limit.setChecked(has_limit_list[0]);
+            limit_EditText.setText(""+limit[0]);
             if (has_register[0]) {
                 has_limit.setVisibility(View.VISIBLE);
                 if (has_limit_list[0]) {
@@ -63,13 +66,7 @@ public class RegistrationFragmentOwner extends Fragment {
                 }
             } else {
                 has_limit.setVisibility(View.GONE);
-                limit_EditText.setVisibility(View.GONE);
-            }
-        }
-        if (has_limit!=null){
-            if (has_limit_list[0]) {
-                limit_EditText.setVisibility(View.VISIBLE);
-            } else {
+                has_limit.setChecked(false);
                 limit_EditText.setVisibility(View.GONE);
             }
         }
@@ -106,10 +103,10 @@ public class RegistrationFragmentOwner extends Fragment {
         has_limit=view.findViewById(R.id.registration_owner_has_limit);
         limit_EditText =view.findViewById(R.id.registration_owner_limit);
         info.setText(eventInfo);
-        limit_EditText.setText(limit[0]+"");
-        has_limit.setChecked(has_limit_list[0]);
-        register.setChecked(has_register[0]);
         if (register !=null){
+            register.setChecked(has_register[0]);
+            has_limit.setChecked(has_limit_list[0]);
+            limit_EditText.setText(""+limit[0]);
             if (has_register[0]) {
                 has_limit.setVisibility(View.VISIBLE);
                 if (has_limit_list[0]) {
@@ -117,13 +114,7 @@ public class RegistrationFragmentOwner extends Fragment {
                 }
             } else {
                 has_limit.setVisibility(View.GONE);
-                limit_EditText.setVisibility(View.GONE);
-            }
-        }
-        if (has_limit!=null){
-            if (has_limit_list[0]) {
-                limit_EditText.setVisibility(View.VISIBLE);
-            } else {
+                has_limit.setChecked(false);
                 limit_EditText.setVisibility(View.GONE);
             }
         }
@@ -136,6 +127,8 @@ public class RegistrationFragmentOwner extends Fragment {
                     has_limit.setVisibility(View.VISIBLE);
                     if (has_limit.isChecked()) {
                         limit_EditText.setVisibility(View.VISIBLE);
+                    }else{
+                        limit_EditText.setVisibility(View.GONE);
                     }
                 } else {
                     has_limit.setVisibility(View.GONE);
@@ -147,7 +140,7 @@ public class RegistrationFragmentOwner extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 has_limit_list[0] = b;
-                if (b) {
+                if (b&&has_register[0]) {
                     limit_EditText.setVisibility(View.VISIBLE);
                 } else {
                     limit_EditText.setVisibility(View.GONE);
@@ -162,9 +155,21 @@ public class RegistrationFragmentOwner extends Fragment {
                 has_limit_list[0]= has_limit_list[1];
                 has_register[0]= has_register[1];
                 limit[0]=limit[1];
-                limit_EditText.setText(limit[0]+"");
-                has_limit.setChecked(has_limit_list[0]);
-                register.setChecked(has_register[0]);
+                if (register !=null){
+                    register.setChecked(has_register[0]);
+                    has_limit.setChecked(has_limit_list[0]);
+                    limit_EditText.setText(""+limit[0]);
+                    if (has_register[0]) {
+                        has_limit.setVisibility(View.VISIBLE);
+                        if (has_limit_list[0]) {
+                            limit_EditText.setVisibility(View.VISIBLE);
+                        }
+                    } else {
+                        has_limit.setVisibility(View.GONE);
+                        has_limit.setChecked(false);
+                        limit_EditText.setVisibility(View.GONE);
+                    }
+                }
             }
         });
         //Сохранение изменений
@@ -173,11 +178,28 @@ public class RegistrationFragmentOwner extends Fragment {
             public void onClick(View view) {
                 try {
                     limit[0]=Integer.parseInt(limit_EditText.getText().toString());
+                    Server.update(getActivity(), has_limit_list[0], has_register[0],limit[0],event_id);
+                    has_limit_list[1]=has_limit_list[0];
+                    has_register[1]= has_register[0];
+                    limit[1]=limit[0];
                 }catch (Exception e){
                     limit[0]=limit[1];
                 }
-                Server.update(getActivity(), has_limit_list[0], has_register[0],limit[0],event_id);
-
+                if (register !=null){
+                    register.setChecked(has_register[0]);
+                    has_limit.setChecked(has_limit_list[0]);
+                    limit_EditText.setText(""+limit[0]);
+                    if (has_register[0]) {
+                        has_limit.setVisibility(View.VISIBLE);
+                        if (has_limit_list[0]) {
+                            limit_EditText.setVisibility(View.VISIBLE);
+                        }
+                    } else {
+                        has_limit.setVisibility(View.GONE);
+                        has_limit.setChecked(false);
+                        limit_EditText.setVisibility(View.GONE);
+                    }
+                }
             }
         });
         //Обновление данных о записи
@@ -190,26 +212,4 @@ public class RegistrationFragmentOwner extends Fragment {
         return view;
     }
 
-    //Пауза автообновления при паузе фрагмента
-    @Override
-    public void onPause() {
-        handler.removeCallbacks(updaterRunnable);
-        super.onPause();
-    }
-
-    //Возобновление автообновления при возобновлении работы фрагмента
-    @Override
-    public void onResume() {
-        super.onResume();
-        handler.postDelayed(updaterRunnable, 100);
-    }
-
-    //Создание автообновления
-    private final Handler handler = new Handler();
-    private final Runnable updaterRunnable = new Runnable() {
-        public void run() {
-            Server.getEventById((int) event_id, getActivity());
-            handler.postDelayed(this, 5000);
-        }
-    };
 }

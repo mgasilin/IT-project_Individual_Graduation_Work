@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
+import java.util.Objects;
 
 // Аннотации задают связь с базой данных и определяют конструкторы, сеттеры и геттеры
 @Data
@@ -26,4 +27,13 @@ public class User {
 
     @Column (name="login")
     private String login;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id == user.id && Objects.equals(name, user.name) && Objects.equals(password, user.password) && Objects.equals(login, user.login);
+    }
+
 }

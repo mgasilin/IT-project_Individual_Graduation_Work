@@ -3,6 +3,7 @@ package ru.server.domain;
 import lombok.*;
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 // Аннотации задают связь с базой данных и определяют конструкторы, сеттеры и геттеры
 @Data
@@ -95,4 +96,18 @@ public class Event {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "event")
     private List<Register> registered;
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Event event = (Event) o;
+        return id == event.id && Double.compare(event.coordX, coordX) == 0 && Double.compare(event.coordY, coordY) == 0
+                && isStreet == event.isStreet && isGroup == event.isGroup && isFamily == event.isFamily && isFree == event.isFree
+                && hasCovid == event.hasCovid && hasRegister == event.hasRegister && isSport == event.isSport
+                && hasAgeRestrictions == event.hasAgeRestrictions && Objects.equals(users, event.users)
+                && Objects.equals(name, event.name) && Objects.equals(description, event.description)
+                && Objects.equals(date, event.date) && Objects.equals(place, event.place);
+    }
 }
