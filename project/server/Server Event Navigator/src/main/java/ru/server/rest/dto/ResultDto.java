@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public
 
-// Класс для отправки результата регистрации на мероприятие, либо для отправки ее статуса
+// Класс для отправки численных результатов
 class ResultDto {
     private int result;
 }

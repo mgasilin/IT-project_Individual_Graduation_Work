@@ -13,6 +13,7 @@ import javax.persistence.*;
 @Table(name = "registrations")
 public class Register {
 
+    // Поля класса
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

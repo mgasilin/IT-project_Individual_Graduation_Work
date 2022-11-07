@@ -38,6 +38,7 @@ public class EventDto {
     private int limit;
     private int has_limit;
 
+    // Преобразование мероприятия в другой класс перед отправкой.
     public static EventDto toDto(Event event) {
         return new EventDtoBuilder()
                 .coordX(event.getCoordX())
@@ -59,6 +60,7 @@ public class EventDto {
                 .build();
     }
 
+    // Преобразование комментария в класс перед отправкой с учетом параметров записи
     public static EventDto toDto_v2(Event event) {
         return new EventDtoBuilder()
                 .coordX(event.getCoordX())

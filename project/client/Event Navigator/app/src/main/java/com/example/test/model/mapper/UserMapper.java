@@ -11,9 +11,11 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-// Класс, конвертирующий ответ JSON-файл, получаемый от сервера в сущность
+// Класс, конвертирующий JSON-файл, получаемый от сервера в сущность
 public class UserMapper {
-    public User userFromJsonArray(JSONObject jsonObject) {
+
+    // Преобразует JSON в обьект класса User
+    public User userFromJsonObject(JSONObject jsonObject) {
         User user = null;
         try {
             JSONObject object = jsonObject.getJSONObject("user");
@@ -28,7 +30,8 @@ public class UserMapper {
         return user;
     }
 
-    public List<User> usersFromJSONArray(JSONArray array){
+    // Преобразует JSON в массив объектов класса User
+    public List<User> usersFromJsonArray(JSONArray array){
         List<User>res= new ArrayList<>();
         try {
             for (int i = 0; i < array.length(); i++) {

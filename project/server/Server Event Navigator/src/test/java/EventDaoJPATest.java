@@ -137,7 +137,7 @@ public class EventDaoJPATest {
         List<Event> actual_events = eventDao.findAll();
         assertThat(expected_list).isEqualTo(actual_events);
 
-        // Повторяем для 2 и третьего мероприятий
+        // Повторяем для второго и третьего мероприятий
         userDao.save(author_2);
         eventDao.save(event_2);
         expected_list.add(event_2);

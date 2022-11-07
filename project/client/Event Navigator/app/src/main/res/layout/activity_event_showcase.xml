@@ -11,7 +11,7 @@
         android:textSize="18sp"
         android:textColor="@color/dark_text_color"
         android:id="@+id/info_showcase"
-        android:text="Инфромация"
+        android:text="Информация"
         app:layout_constraintEnd_toStartOf="@+id/comments_showcase"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"

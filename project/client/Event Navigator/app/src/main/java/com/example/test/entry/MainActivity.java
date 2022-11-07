@@ -73,7 +73,8 @@ public class MainActivity extends AppCompatActivity {
             Intent i = new Intent(MainActivity.this, RegisterActivity.class);
             startActivity(i);
         });
-        //Проверка вводимых данных. Проверяется, где не введены данные и красным текстом над полем ввода указывается, что не введен тот или иной параметр
+        //Проверка вводимых данных. Проверяется, где не введены данные и красным текстом над полем ввода указывается,
+        // что не введен тот или иной параметр
         login_button.setOnClickListener(view -> {
             String login, password;
             login = loginView.getText().toString();

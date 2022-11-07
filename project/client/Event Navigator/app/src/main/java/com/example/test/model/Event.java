@@ -27,6 +27,7 @@ public class Event {
     private List<User> registrated = new ArrayList<>();
     private int limit;
 
+    // Геттеры
     public boolean isRegister() {
         return register;
     }
@@ -43,6 +44,7 @@ public class Event {
         return limit;
     }
 
+    // Конструкторы
     public Event(String date, long id, long owner_id, String name, String description, String place, double coordX, double coordY, boolean isStreet, boolean isGroup, boolean isFamily, boolean isFree, boolean hasCovid, boolean hasRegister, boolean isSport, boolean hasAgeRestrictions, boolean register, boolean has_limit,  int limit) {
         this.date = date;
         this.id = id;
@@ -124,6 +126,7 @@ public class Event {
         this.hasAgeRestrictions = hasAgeRestrictions;
     }
 
+    //Геттеры
     public String getDate() {
         return date;
     }
@@ -201,6 +204,7 @@ public class Event {
         return result;
     }
 
+    // Конструктор
     public Event(String date, long id, long owner_id, String name, String description, String place, double coordX, double coordY, boolean isStreet, boolean isGroup, boolean isFamily, boolean isFree, boolean hasCovid, boolean hasRegister, boolean isSport, boolean hasAgeRestrictions, String author) {
         this.date = date;
         this.id = id;
@@ -220,10 +224,12 @@ public class Event {
         this.hasAgeRestrictions = hasAgeRestrictions;
     }
 
+    //Геттер
     public void setRegistrated(List<User> registrated){
         this.registrated = registrated;
     }
 
+    //Обновление параметров записи
     public void update(int limit, boolean has_limit, boolean register) {
         this.limit = limit;
         this.has_limit = has_limit;

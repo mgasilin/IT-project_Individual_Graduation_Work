@@ -8,10 +8,11 @@ import org.json.JSONObject;
 
 import java.util.List;
 
-// Класс, конвертирующий ответ JSON-файл, получаемый от сервера в сущность
+// Класс, конвертирующий JSON-файл, получаемый от сервера в сущность
 public class EventMapper {
 
-    public Event eventFromJsonArray(JSONObject jsonObject, int user_id) {
+    // Преобразует JSON в обьект класса Event
+    public Event eventFromJsonObject(JSONObject jsonObject, int user_id) {
         Event event = null;
         try {
             event = new Event(
@@ -37,11 +38,12 @@ public class EventMapper {
         return event;
     }
 
-    public Event eventFromJsonArray_v2(JSONObject jsonObject, int user_id){
+    // Преобразует JSON в обьект класса Event с учетом параметров записи
+    public Event eventFromJsonObject_extended(JSONObject jsonObject, int user_id){
         Event event = null;
 
         try {
-            List<User> users= new UserMapper().usersFromJSONArray(jsonObject.getJSONArray("registers"));
+            List<User> users= new UserMapper().usersFromJsonArray(jsonObject.getJSONArray("registers"));
             event = new Event(
                     jsonObject.getString("date"),
                     jsonObject.getInt("id"),

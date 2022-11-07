@@ -65,7 +65,7 @@ public class RegisterFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_register, container, false);
-        noEventsText =view.findViewById(R.id.t);
+        noEventsText =view.findViewById(R.id.no_event_register);
         Server.findRegister(getActivity(),RegisterFragment.this,userId);
         List<Event> myEvents = new ArrayList<>();
         RecyclerView recycler = view.findViewById(R.id.reg_recycler);

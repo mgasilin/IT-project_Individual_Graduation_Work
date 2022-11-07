@@ -28,7 +28,7 @@ public class RegistrationFragmentUser extends Fragment {
     private TextView info;
     private AppCompatButton register;
 
-    //Слушатели отвечат за то, какое именно действие будет выполняться
+    //Слушатели отвечат за то, какое именно действие будет выполняться при нажатии на кнопку записи
     //Действия при отсутствии возможности записи
     private final View.OnClickListener unavailable = new View.OnClickListener() {
         @Override

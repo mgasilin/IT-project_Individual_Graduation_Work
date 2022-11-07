@@ -86,7 +86,7 @@
             android:layout_height="wrap_content"
             android:button="@null"
             android:drawableRight="@drawable/checkbox"
-            android:text="Спротивное мероприятие"
+            android:text="Спортивное мероприятие"
             />
         <CheckBox
             android:textSize="18sp"

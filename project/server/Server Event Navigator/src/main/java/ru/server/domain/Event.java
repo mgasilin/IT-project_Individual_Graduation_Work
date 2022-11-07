@@ -14,7 +14,7 @@ import java.util.Objects;
 @Table(name = "events")
 public class Event {
 
-
+    // Поля класса
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -98,6 +98,7 @@ public class Event {
     private List<Register> registered;
 
 
+    // Переопределение сравнения
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

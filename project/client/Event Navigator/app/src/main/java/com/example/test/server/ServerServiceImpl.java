@@ -2,6 +2,7 @@ package com.example.test.server;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.test.entry.MainActivity;
@@ -37,14 +38,15 @@ import java.util.List;
 public class ServerServiceImpl implements ServerInterface {
     public static final String BASE_URL = "http://192.168.1.120:8081";
 
+    // Очередь запросов
     private RequestQueue queue;
-    private final Response.ErrorListener errorListener;
 
+    // Общий конструктор
     public ServerServiceImpl() {
-        errorListener = new ErrorListenerImpl();
     }
 
-    public void findByLength(long length, double x, double y, Context context, MapFragment mapFragment) {
+    // Поиск по удаленности, результат передаем в mapFragment
+    public void findByLength(long length,  Context context, MapFragment mapFragment) {
         if (queue == null) {
             queue = Volley.newRequestQueue(context);
         }
@@ -57,19 +59,26 @@ public class ServerServiceImpl implements ServerInterface {
             for (int i = 0; i < response.length(); i++) {
                 try {
                     JSONObject jsonObject = response.getJSONObject(i);
-                    User user = new UserMapper().userFromJsonArray(jsonObject);
-                    Event event = new EventMapper().eventFromJsonArray(jsonObject, user.getId());
+                    User user = new UserMapper().userFromJsonObject(jsonObject);
+                    Event event = new EventMapper().eventFromJsonObject(jsonObject, user.getId());
                     events.add(event);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
-            mapFragment.updateLen(events, x, y, (int) length);
-        }, errorListener);
+            mapFragment.updateLen(events, (int) length);
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "Возникла проблема с подключением к серверу", Toast.LENGTH_SHORT).show();
+                if (error.getMessage()!=null && !error.getMessage().isEmpty()) Log.e("Server",error.getMessage());
+            }
+        });
 
         queue.add(jsonArrayRequest);
     }
 
+    // Добавляем мероприятие, результат не возвращаем
     @Override
     public void insertEvent(Event e, Context context) {
         if (queue == null) {
@@ -96,13 +105,20 @@ public class ServerServiceImpl implements ServerInterface {
                 Request.Method.POST,
                 url,
                 null, response -> {
-            User user = new UserMapper().userFromJsonArray(response);
-            Event event = new EventMapper().eventFromJsonArray(response, user.getId());
-        }, errorListener);
+            User user = new UserMapper().userFromJsonObject(response);
+            Event event = new EventMapper().eventFromJsonObject(response, user.getId());
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "Возникла проблема с подключением к серверу", Toast.LENGTH_SHORT).show();
+                if (error.getMessage()!=null && !error.getMessage().isEmpty()) Log.e("Server",error.getMessage());
+            }
+        });
 
         queue.add(jsonObjectRequest);
     }
 
+    // Получение мероприятия по айди, результат передаем в showCaseFragment
     @Override
     public void getById(int id, Context context, ShowCaseFragment showCaseFragment) {
         if (queue == null) {
@@ -114,14 +130,17 @@ public class ServerServiceImpl implements ServerInterface {
                 Request.Method.GET,
                 url,
                 null, response -> {
-            User user = new UserMapper().userFromJsonArray(response);
-            Event event = new EventMapper().eventFromJsonArray(response, user.getId());
+            User user = new UserMapper().userFromJsonObject(response);
+            Event event = new EventMapper().eventFromJsonObject(response, user.getId());
             showCaseFragment.update(event);
-        }, error -> showCaseFragment.back());
+        }, error -> {
+            showCaseFragment.back();
+        });
 
         queue.add(jsonObjectRequest);
     }
 
+    // Получение мероприятия по айди, результат передаем в showCaseMap
     @Override
     public void getById(int id, Context context, ShowCaseMap showCaseMap) {
         if (queue == null) {
@@ -133,14 +152,20 @@ public class ServerServiceImpl implements ServerInterface {
                 Request.Method.GET,
                 url,
                 null, response -> {
-            User user = new UserMapper().userFromJsonArray(response);
-            Event event = new EventMapper().eventFromJsonArray(response, user.getId());
+            User user = new UserMapper().userFromJsonObject(response);
+            Event event = new EventMapper().eventFromJsonObject(response, user.getId());
             showCaseMap.update(event);
-        }, errorListener);
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (error.getMessage()!=null && !error.getMessage().isEmpty()) Log.e("Server",error.getMessage());
+            }
+        });
 
         queue.add(jsonArrayRequest);
     }
 
+    // Получение мероприятия по айди, результат передаем в eventShowCaseActivity, получаемую из контекста.
     @Override
     public void getById(int id, Context context) {
         if (queue == null) {
@@ -152,8 +177,8 @@ public class ServerServiceImpl implements ServerInterface {
                 Request.Method.GET,
                 url,
                 null, response -> {
-            User user = new UserMapper().userFromJsonArray(response);
-            Event event = new EventMapper().eventFromJsonArray_v2(response, user.getId());
+            User user = new UserMapper().userFromJsonObject(response);
+            Event event = new EventMapper().eventFromJsonObject_extended(response, user.getId());
             ((EventShowCaseActivity) context).update(event);
         }, error -> {
             ((EventShowCaseActivity) context).back();
@@ -162,6 +187,7 @@ public class ServerServiceImpl implements ServerInterface {
         queue.add(jsonObjectRequest);
     }
 
+    // Получение мероприятий по названию, результат передаем в searchFragment
     @Override
     public void searchByName(String name, Context context, SearchFragment searchFragment) {
         if (queue == null) {
@@ -178,8 +204,8 @@ public class ServerServiceImpl implements ServerInterface {
 
                     JSONObject jsonObject = response.getJSONObject(i);
 
-                    User user = new UserMapper().userFromJsonArray(jsonObject);
-                    Event event = new EventMapper().eventFromJsonArray(jsonObject, user.getId());
+                    User user = new UserMapper().userFromJsonObject(jsonObject);
+                    Event event = new EventMapper().eventFromJsonObject(jsonObject, user.getId());
                     events.add(event);
                 }
                 searchFragment.update(events);
@@ -187,13 +213,19 @@ public class ServerServiceImpl implements ServerInterface {
                 e.printStackTrace();
             }
 
-        }, errorListener);
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "Возникла проблема с подключением к серверу", Toast.LENGTH_SHORT).show();
+                if (error.getMessage()!=null && !error.getMessage().isEmpty()) Log.e("Server",error.getMessage());
+            }
+        });
 
         queue.add(jsonArrayRequest);
 
     }
 
-
+    // Получение мероприятий по айди создателя, результат передаем в homeFragment
     @Override
     public void getByUserId(int id, Context context, HomeFragment homeFragment) {
         if (queue == null) {
@@ -209,19 +241,26 @@ public class ServerServiceImpl implements ServerInterface {
             try {
                 for (int i = 0; i < response.length(); i++) {
                     JSONObject jsonObject = response.getJSONObject(i);
-                    User user = new UserMapper().userFromJsonArray(jsonObject);
-                    Event event = new EventMapper().eventFromJsonArray(jsonObject, user.getId());
+                    User user = new UserMapper().userFromJsonObject(jsonObject);
+                    Event event = new EventMapper().eventFromJsonObject(jsonObject, user.getId());
                     events.add(event);
                 }
                 homeFragment.update(events);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-        }, errorListener);
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "Возникла проблема с подключением к серверу", Toast.LENGTH_SHORT).show();
+                if (error.getMessage()!=null && !error.getMessage().isEmpty()) Log.e("Server",error.getMessage());
+            }
+        });
 
         queue.add(jsonArrayRequest);
     }
 
+    // Получение мероприятий по категориям, результат передаем в mapFragment
     @Override
     public void getByCategories(boolean isStreet, boolean isGroup, boolean isFamily, boolean isFree, boolean isCovid, boolean isRegister, boolean isSport, boolean isAgeRestricted, Context context, MapFragment mapFragment) {
         if (queue == null) {
@@ -238,8 +277,8 @@ public class ServerServiceImpl implements ServerInterface {
 
                     JSONObject jsonObject = response.getJSONObject(i);
 
-                    User user = new UserMapper().userFromJsonArray(jsonObject);
-                    Event event = new EventMapper().eventFromJsonArray(jsonObject, user.getId());
+                    User user = new UserMapper().userFromJsonObject(jsonObject);
+                    Event event = new EventMapper().eventFromJsonObject(jsonObject, user.getId());
                     events.add(event);
                 }
                 mapFragment.updateCat(events);
@@ -247,10 +286,17 @@ public class ServerServiceImpl implements ServerInterface {
             } catch (JSONException e1) {
                 e1.printStackTrace();
             }
-        }, errorListener);
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "Возникла проблема с подключением к серверу", Toast.LENGTH_SHORT).show();
+                if (error.getMessage()!=null && !error.getMessage().isEmpty()) Log.e("Server",error.getMessage());
+            }
+        });
         queue.add(jsonArrayRequest);
     }
 
+    // Получение мероприятий по категориям, результат передаем в searchFragment
     @Override
     public void getByCategories(boolean isStreet, boolean isGroup, boolean isFamily, boolean isFree, boolean isCovid, boolean isRegister, boolean isSport, boolean isAgeRestricted, Context context, SearchFragment searchFragment) {
         if (queue == null) {
@@ -267,18 +313,25 @@ public class ServerServiceImpl implements ServerInterface {
 
                     JSONObject jsonObject = response.getJSONObject(i);
 
-                    User user = new UserMapper().userFromJsonArray(jsonObject);
-                    Event event = new EventMapper().eventFromJsonArray(jsonObject, user.getId());
+                    User user = new UserMapper().userFromJsonObject(jsonObject);
+                    Event event = new EventMapper().eventFromJsonObject(jsonObject, user.getId());
                     events.add(event);
                 }
                 searchFragment.update(events);
             } catch (JSONException e1) {
                 e1.printStackTrace();
             }
-        }, errorListener);
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "Возникла проблема с подключением к серверу", Toast.LENGTH_SHORT).show();
+                if (error.getMessage()!=null && !error.getMessage().isEmpty()) Log.e("Server",error.getMessage());
+            }
+        });
         queue.add(jsonArrayRequest);
     }
 
+    // Удаление мероприятия по айди
     @Override
     public void removeEvent(Event event, Context context) {
         if (queue == null) {
@@ -288,12 +341,20 @@ public class ServerServiceImpl implements ServerInterface {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.DELETE,
                 url,
-                null, response -> {
-        }, errorListener);
+                null, response -> {}, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (!error.getMessage().contains("JSONException")){
+                    Toast.makeText(context, "Возникла ошибка с подключением к серверу", Toast.LENGTH_SHORT).show();
+                    if (error.getMessage()!=null && !error.getMessage().isEmpty()) Log.e("Server",error.getMessage());
+                }
+            }
+        });
 
         queue.add(jsonArrayRequest);
     }
 
+    // Вход в систему, результат передаем в активность входа, получаемую из контекста
     @Override
     public void login(String login, String password, Context context) {
         if (queue == null) {
@@ -311,10 +372,17 @@ public class ServerServiceImpl implements ServerInterface {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-        }, errorListener);
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "Возникла проблема с подключением к серверу", Toast.LENGTH_SHORT).show();
+                if (error.getMessage()!=null && !error.getMessage().isEmpty()) Log.e("Server",error.getMessage());
+            }
+        });
         queue.add(jsonObjectRequest);
     }
 
+    // Регистрация нового пользователя, результат передаем в активность регистрации, получаемую из контекста
     @Override
     public void register(String login, String password, String username, Context context) {
         if (queue == null) {
@@ -330,10 +398,17 @@ public class ServerServiceImpl implements ServerInterface {
                 ((RegisterActivity) context).update(result);
             } catch (JSONException e) {
             }
-        }, errorListener);
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "Похоже, возникла ошибка при подключении к серверу", Toast.LENGTH_SHORT).show();
+                if (error.getMessage()!=null && !error.getMessage().isEmpty()) Log.e("Server",error.getMessage());
+            }
+        });
         queue.add(jsonObjectRequest);
     }
 
+    // Получение всех комменариев к мероприятию. Результат передаем в активность просмотра мероприятия, получаемую из контекста
     @Override
     public void findByEvent(Event event, Context context) {
         if (queue == null) {
@@ -349,8 +424,8 @@ public class ServerServiceImpl implements ServerInterface {
                 for (int i = 0; i < response.length(); i++) {
                     User user = null;
                     JSONObject jsonObject = response.getJSONObject(i);
-                    user = new UserMapper().userFromJsonArray(jsonObject);
-                    Comment comment = new CommentMapper().commentFromJsonArray(jsonObject, user.getId(), user.getName());
+                    user = new UserMapper().userFromJsonObject(jsonObject);
+                    Comment comment = new CommentMapper().commentFromJsonObject(jsonObject, user.getId(), user.getName());
                     comments.add(comment);
                 }
                 ((EventShowCaseActivity) context).update(comments);
@@ -358,11 +433,17 @@ public class ServerServiceImpl implements ServerInterface {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-        }, errorListener);
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (error.getMessage()!=null && !error.getMessage().isEmpty()) Log.e("Server",error.getMessage());
+            }
+        });
 
         queue.add(jsonArrayRequest);
     }
 
+    // Добавление комментария
     @Override
     public void insertComment(Comment comment, Context context) {
         if (queue == null) {
@@ -377,18 +458,21 @@ public class ServerServiceImpl implements ServerInterface {
             for (int i = 0; i < response.length(); i++) {
                 try {
                     JSONObject jsonObject = response.getJSONObject(i);
-                    User user = new UserMapper().userFromJsonArray(jsonObject);
-                    Comment comment1 = new CommentMapper().commentFromJsonArray(jsonObject, user.getId(), user.getName());
+                    User user = new UserMapper().userFromJsonObject(jsonObject);
+                    Comment comment1 = new CommentMapper().commentFromJsonObject(jsonObject, user.getId(), user.getName());
                     comments.add(comment1);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
             ((EventShowCaseActivity) context).update(comments);
-        }, error -> ((EventShowCaseActivity) context).back());
+        }, error -> {
+            ((EventShowCaseActivity) context).back();
+        });
         queue.add(jsonArrayRequest);
     }
 
+    // Запись на мероприятие через айди пользователя и айди мероприятия
     @Override
     public void sign(RegistrationFragmentUser fragmentUser, long event_id, long id) {
         if (queue == null) {
@@ -421,10 +505,16 @@ public class ServerServiceImpl implements ServerInterface {
                 e.printStackTrace();
             }
             fragmentUser.update(result[0].getResult());
-        }, errorListener);
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (error.getMessage()!=null && !error.getMessage().isEmpty()) Log.e("Server",error.getMessage());
+            }
+        });
         queue.add(jsonObjectRequest);
     }
 
+    // Отмена записи по аналогии с предыдущим методом
     @Override
     public void unsign(RegistrationFragmentUser registrationFragmentUser, long event_id, long id) {
         if (queue == null) {
@@ -440,10 +530,16 @@ public class ServerServiceImpl implements ServerInterface {
                 Log.i("Register", "unregister done");
                 registrationFragmentUser.update(1);
             }
-        }, errorListener);
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (error.getMessage()!=null && !error.getMessage().isEmpty()) Log.e("Server",error.getMessage());
+            }
+        });
         queue.add(jsonObjectRequest);
     }
 
+    // Обновление параметров записи на мероприятие. Результат передаем в активность просмотра мероприятия, получаемую из контекста
     @Override
     public void update(Context context, boolean has_limit, boolean has_register, int limit, long event_id) {
         if (queue == null) {
@@ -458,14 +554,21 @@ public class ServerServiceImpl implements ServerInterface {
                 null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                User user = new UserMapper().userFromJsonArray(response);
-                Event event = new EventMapper().eventFromJsonArray_v2(response, user.getId());
+                User user = new UserMapper().userFromJsonObject(response);
+                Event event = new EventMapper().eventFromJsonObject_extended(response, user.getId());
                 ((EventShowCaseActivity) context).update(event);
             }
-        }, errorListener);
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (error.getMessage()!=null && !error.getMessage().isEmpty()) Log.e("Server",error.getMessage());
+            }
+        });
         queue.add(jsonObjectRequest);
     }
 
+    // Получение всех мероприятий, на которые зарегистрировался пользователь.
+    // Получение происходит по айди пользователя. Результат передается в registerFragment
     @Override
     public void findRegister(Context context, RegisterFragment registerFragment, long id) {
         if (queue == null) {
@@ -480,24 +583,21 @@ public class ServerServiceImpl implements ServerInterface {
             for (int i = 0; i < response.length(); i++) {
                 try {
                     JSONObject jsonObject = response.getJSONObject(i);
-                    User user = new UserMapper().userFromJsonArray(jsonObject);
-                    Event event = new EventMapper().eventFromJsonArray(jsonObject, user.getId());
+                    User user = new UserMapper().userFromJsonObject(jsonObject);
+                    Event event = new EventMapper().eventFromJsonObject(jsonObject, user.getId());
                     events.add(event);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
             registerFragment.update(events);
-        }, errorListener);
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (error.getMessage()!=null && !error.getMessage().isEmpty()) Log.e("Server",error.getMessage());
+            }
+        });
         queue.add(jsonArrayRequest);
     }
 
-    private static class ErrorListenerImpl implements Response.ErrorListener {
-
-
-        @Override
-        public void onErrorResponse(VolleyError error) {
-            Log.e("VolleyError", "message:" + error.getMessage());
-        }
-    }
 }

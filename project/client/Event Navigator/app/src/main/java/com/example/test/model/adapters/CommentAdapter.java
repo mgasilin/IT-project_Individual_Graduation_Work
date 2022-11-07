@@ -30,11 +30,13 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
     List<Comment> comments;
     private Context context;
 
+    // Конструктор класса
     public CommentAdapter(List<Comment> comments, Context context) {
         this.comments = comments;
         this.context = context;
     }
 
+    /* Методы, отвечающие за первоначальную настройку RecyclerView */
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
@@ -52,11 +54,13 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
         commentViewHolder.commentText.setText(comments.get(i).getMessage());
     }
 
+    // Возвращает количество элементов в списке
     @Override
     public int getItemCount() {
         return comments.size();
     }
 
+    // Устанавливает новый список комментариев для отображения
     public void setComments(List<Comment> comments) {
         this.comments = comments;
     }

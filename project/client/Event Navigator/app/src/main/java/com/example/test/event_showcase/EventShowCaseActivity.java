@@ -36,7 +36,7 @@ public class EventShowCaseActivity extends AppCompatActivity {
             return;
         }
         owner = event.getOwner_id() == user;
-        //Обновление данных в показываемых на фрагментах
+        //Обновление данных, показываемых на фрагментах
         if (!owner) {
             registrationFragmentUser.update(event);
         } else {

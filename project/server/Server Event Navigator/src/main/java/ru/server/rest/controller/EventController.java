@@ -20,11 +20,13 @@ public class EventController {
     private final UserService userService;
     private final EventService eventService;
 
+    // Получение всех мероприятий
     @GetMapping("/events")
     public List<EventDto> getAll() {
         return eventService.getAll().stream().map(EventDto::toDto).collect(Collectors.toList());
     }
 
+    // Получение мероприятия по айди
     @GetMapping("/events/{id}")
     public EventDto getById(@PathVariable int id) {
         try {
@@ -35,20 +37,22 @@ public class EventController {
         }
     }
 
+    // Получение мероприятий по категориям.
     @GetMapping("/events/categories")
-    public List<EventDto> events(@RequestParam boolean street, @RequestParam boolean group, @RequestParam boolean sport,
-                                 @RequestParam boolean fam, @RequestParam boolean free, @RequestParam boolean covid,
-                                 @RequestParam boolean reg, @RequestParam boolean age) {
+    public List<EventDto> getByCategories(@RequestParam boolean street, @RequestParam boolean group, @RequestParam boolean sport,
+                                          @RequestParam boolean fam, @RequestParam boolean free, @RequestParam boolean covid,
+                                          @RequestParam boolean reg, @RequestParam boolean age) {
         List<Event> events = eventService.getByCategories(street, group, fam, free, covid, reg, age, sport);
         return events.stream().map(EventDto::toDto).collect(Collectors.toList());
     }
 
-
+    // Поиск по имени. Возвращает мероприятия, содержащие переданную строку в названии
     @GetMapping("/events/name")
     public List<EventDto> getByName(@RequestParam String name) {
         return eventService.searchByName(name).stream().map(EventDto::toDto).collect(Collectors.toList());
     }
 
+    // Получение всех мероприятий пользователя по айди
     @GetMapping("/events/user")
     public List<EventDto> getByUserId(@RequestParam int id) {
         try {
@@ -58,6 +62,7 @@ public class EventController {
         }
     }
 
+    //Получение всех мероприятий для последующего поиска по удаленности
     @GetMapping("/events/length")
     public List<EventDto> getByLength() {
         try {
@@ -67,29 +72,23 @@ public class EventController {
         }
     }
 
+    // Удаление мероприятия по айди
     @DeleteMapping("/events/delete")
     public void deleteById(@RequestParam int id) {
         eventService.removeEvent(eventService.getById(id));
     }
 
-    @PostMapping("/events/add")
-    public EventDto add(@RequestParam String name, @RequestParam String description, @RequestParam String date, @RequestParam int owner, @RequestParam String place, @RequestParam double x, @RequestParam double y, @RequestParam int street, @RequestParam int group, @RequestParam int fam, @RequestParam int free, @RequestParam int covid, @RequestParam int register, @RequestParam int ageRes, @RequestParam int sport) {
-        return EventDto.toDto(eventService.insert(Event.builder()
-                .date(date).coordX(x).coordY(y).description(description).hasAgeRestrictions(ageRes)
-                .hasCovid(covid).isFamily(fam).isFree(free).isGroup(group).isSport(sport).users(userService.getById(owner))
-                .isStreet(street).name(name).place(place).hasRegister(register).limit(100).has_limit(0).registration(0).build()));
-    }
-
+    // Создание мероприятия с учетом параметров записи
     @PostMapping("/events/add_v2")
-    public EventDto add_v2(@RequestParam String name, @RequestParam String description, @RequestParam String date, @RequestParam int owner, @RequestParam String place, @RequestParam double x, @RequestParam double y, @RequestParam int street, @RequestParam int group, @RequestParam int fam, @RequestParam int free, @RequestParam int covid, @RequestParam int register, @RequestParam int ageRes, @RequestParam int sport, @RequestParam int limit, @RequestParam boolean has_limit, @RequestParam boolean has_register) {
+    public EventDto addEvent_extended(@RequestParam String name, @RequestParam String description, @RequestParam String date, @RequestParam int owner, @RequestParam String place, @RequestParam double x, @RequestParam double y, @RequestParam int street, @RequestParam int group, @RequestParam int fam, @RequestParam int free, @RequestParam int covid, @RequestParam int register, @RequestParam int ageRes, @RequestParam int sport, @RequestParam int limit, @RequestParam boolean has_limit, @RequestParam boolean has_register) {
         return EventDto.toDto(eventService.insert(Event.builder()
                 .date(date).coordX(x).coordY(y).description(description).hasAgeRestrictions(ageRes)
                 .hasCovid(covid).isFamily(fam).isFree(free).isGroup(group).isSport(sport).users(userService.getById(owner))
                 .isStreet(street).name(name).place(place).hasRegister(register).registered(new ArrayList<>()).registration(has_register ? 1 : 0).has_limit(has_limit ? 1 : 0).limit(limit).build()));
     }
-
+    // Регистрация пользователя на мероприятие по двум айди
     @PostMapping("/events/{event_id}/register")
-    public ResultDto register(@PathVariable int event_id, @RequestParam int id) {
+    public ResultDto registerById(@PathVariable int event_id, @RequestParam int id) {
         try {
             Event event = eventService.getById(event_id);
             if (event.getRegistration() == 1 && !(event.getHas_limit() == 1 && event.getRegistered().size() > event.getLimit())) {
@@ -117,14 +116,16 @@ public class EventController {
         }
     }
 
+    // Обновление данных о регистрации указанного мероприятия.
     @PostMapping("/events/{event_id}/update")
-    public EventDto update(@PathVariable int event_id, @RequestParam int has_limit, @RequestParam int register, @RequestParam int limit) {
+    public EventDto updateEvent(@PathVariable int event_id, @RequestParam int has_limit, @RequestParam int register, @RequestParam int limit) {
         eventService.updateSettings(event_id, has_limit == 1, limit, register == 1);
         return getById(event_id);
     }
 
+    //Отмена регистрации на мероприятие
     @PostMapping("/events/{event_id}/unregister")
-    public ResultDto unregister(@PathVariable int event_id, @RequestParam int id) {
+    public ResultDto unregisterById(@PathVariable int event_id, @RequestParam int id) {
         try {
             Event event = eventService.getById(event_id);
             List<Register> registers = event.getRegistered();
@@ -144,14 +145,17 @@ public class EventController {
         }
     }
 
+    // Создание мероприятия
     @PostMapping("/events/add/v2")
-    public EventDto add_v2(@RequestParam String name, @RequestParam String description, @RequestParam String date, @RequestParam int owner, @RequestParam String place, @RequestParam double x, @RequestParam double y, @RequestParam int street, @RequestParam int group, @RequestParam int fam, @RequestParam int free, @RequestParam int covid, @RequestParam int register, @RequestParam int ageRes, @RequestParam int sport, @RequestParam int limit, @RequestParam int has_limit, @RequestParam int reg) {
+    public EventDto addEvent_extended(@RequestParam String name, @RequestParam String description, @RequestParam String date, @RequestParam int owner, @RequestParam String place, @RequestParam double x, @RequestParam double y, @RequestParam int street, @RequestParam int group, @RequestParam int fam, @RequestParam int free, @RequestParam int covid, @RequestParam int register, @RequestParam int ageRes, @RequestParam int sport, @RequestParam int limit, @RequestParam int has_limit, @RequestParam int reg) {
         return EventDto.toDto(eventService.insert(Event.builder()
                 .date(date).coordX(x).coordY(y).description(description).hasAgeRestrictions(ageRes)
                 .hasCovid(covid).isFamily(fam).isFree(free).isGroup(group).isSport(sport).users(userService.getById(owner))
                 .isStreet(street).name(name).place(place).hasRegister(register).registration(reg).has_limit(has_limit).limit(limit).build()));
     }
 
+
+    // Поиск мероприятий, на которые записан пользователь.
     @GetMapping("/events/register/find")
     public List<EventDto> getRegisters(@RequestParam int id) {
         return eventService.getRegisters(id).stream().map(EventDto::toDto).collect(Collectors.toList());

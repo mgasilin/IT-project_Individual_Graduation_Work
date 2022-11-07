@@ -9,7 +9,7 @@ public class Comment {
     private long sequence_number;
     private String authorName = null;
 
-
+    //Конструктор
     public Comment(long id, long event_id, long author_id, String message, long sequence_number, String user_name) {
         this.id = id;
         this.event_id = event_id;
@@ -19,6 +19,7 @@ public class Comment {
         this.authorName = user_name;
     }
 
+    //Геттеры
     public long getId() {
         return id;
     }
@@ -51,6 +52,7 @@ public class Comment {
                 '}';
     }
 
+    // Конструктор
     public Comment(long event_id, long author_id, String message) {
         this.event_id = event_id;
         this.author_id = author_id;

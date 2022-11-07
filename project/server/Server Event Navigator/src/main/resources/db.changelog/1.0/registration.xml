@@ -5,17 +5,17 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <changeSet id="2022-13-05--comment" author="mgasilin">
+    <changeSet id="registration" author="mgasilin">
 
         <!-- Проверяем нет ли уже таблицы с таким названием -->
         <preConditions onFail="MARK_RAN">
             <not>
-                <tableExists tableName="comments"/>
+                <tableExists tableName="registrations"/>
             </not>
         </preConditions>
 
         <!-- Создаем таблицу -->
-        <createTable tableName="comments">
+        <createTable tableName="registrations">
 
             <!-- Описываем колонки -->
             <column name="id"
@@ -24,26 +24,14 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
 
-            <column name="content" type="VARCHAR(400)">
-                <constraints nullable="false"/>
+            <column name="user_id" type="NUMERIC">
+                <constraints nullable="false" foreignKeyName="f_user_id" references="users(id)"/>
             </column>
-
-            <column name="author_id" type="NUMERIC(19,0)">
-                <constraints nullable="false"
-                             foreignKeyName="fk_author_id"
-                             references="users(id)"/>
-            </column>
-
-            <column name="event_id" type="NUMERIC(19,0)">
-                <constraints deleteCascade="true" nullable="false" foreignKeyName="fk_event_id" references="events(id)"/>
-            </column>
-
-            <column name="sequence_number" type="NUMERIC(10,0)">
-                <constraints nullable="false" deleteCascade="true"/>
+            <column name="event_id" type="NUMERIC">
+                <constraints nullable="false" foreignKeyName="f_event_id" references="events(id)" deleteCascade="true"/>
             </column>
         </createTable>
 
     </changeSet>
-
 
 </databaseChangeLog>

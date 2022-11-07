@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CommentDto {
 
+    // Поля класса
     private int id;
 
     private String content;
@@ -23,6 +24,7 @@ public class CommentDto {
 
     private int event_id;
 
+    // Преобразование комментария в класс перед отправкой.
     public static CommentDto toDto(Comment comment) {
         return new CommentDto(comment.getId(), comment.getContent(), UserDto.toDto(comment.getAuthor()),comment.getSequence_number(), comment.getEvent().getId());
     }

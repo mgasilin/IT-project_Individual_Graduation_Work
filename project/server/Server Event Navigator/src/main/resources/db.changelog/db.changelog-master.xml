@@ -7,9 +7,9 @@
     <!-- Запускаем поочереди скрипты. Последовательность запуска важна, т.к. у таблиц есть зависимости -->
 
     <!--<includeAll path="db.changelog/1.0"/>-->
-    <include file="db.changelog/1.0/2022-13-05--user.xml"/>
-    <include file="db.changelog/1.0/2022-13-05--event.xml"/>
-    <include file="db.changelog/1.0/2022-13-05--comment.xml"/>
-    <include file="db.changelog/1.0/2022-19-07--registration.xml"/>
+    <include file="db.changelog/1.0/user.xml"/>
+    <include file="db.changelog/1.0/event.xml"/>
+    <include file="db.changelog/1.0/comment.xml"/>
+    <include file="db.changelog/1.0/registration.xml"/>
 
 </databaseChangeLog>

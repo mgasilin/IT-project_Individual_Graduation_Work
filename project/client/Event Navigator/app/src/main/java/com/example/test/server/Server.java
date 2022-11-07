@@ -24,16 +24,19 @@ public class Server {
 
     private static final ServerServiceImpl server = new ServerServiceImpl();
 
+    /* Методы для работы с серверной часть приложения: передаются параметры, вызывается еще один метод.
+    Один из обязательных параметров - контекст, он либо передается напрямую, либо через что-то, от чего его можно получить
+    Методы могут быть похожи, но отличаться лишь передаваемой активностью. Это происходит по причине того,
+    что в различных фрагментах/активностях могут потребоваться одинаковые методы рабоыт с сервером,
+    например, получение мероприятия по айди */
+
     public static void insertEvent(Event e, Context context) {
         server.insertEvent(e, context);
     }
 
-    public static void findByLength(long length, SharedPreferences sharedPreferences, Context context, MapFragment mapFragment) {
-        double x = Double.parseDouble(sharedPreferences.getString("start_lat", "57.333"));
-        double y = Double.parseDouble(sharedPreferences.getString("start_lng", "37.333"));
-        server.findByLength(length, x, y, context, mapFragment);
+    public static void findByLength(long length, Context context, MapFragment mapFragment) {
+        server.findByLength(length, context, mapFragment);
     }
-
       
     public static void getEventById(int id, Context context) {
         server.getById(id, context);

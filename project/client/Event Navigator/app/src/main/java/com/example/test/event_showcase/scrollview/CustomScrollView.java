@@ -7,6 +7,7 @@ import android.widget.ScrollView;
 //Пользовательская реализация ScrollView для предотвращения конфликта нажатий на карте и на самой активности
 public class CustomScrollView extends ScrollView {
 
+    // Неообходимые конструкторы класса
     public CustomScrollView(Context context) {
         super(context);
     }
@@ -19,6 +20,7 @@ public class CustomScrollView extends ScrollView {
         super(context, attrs, defStyle);
     }
 
+    // Переопределение поведения при взаимодействии
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         final int action = ev.getAction();

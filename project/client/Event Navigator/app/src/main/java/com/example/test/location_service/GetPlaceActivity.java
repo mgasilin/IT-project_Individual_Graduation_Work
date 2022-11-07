@@ -39,7 +39,7 @@ public class GetPlaceActivity extends FragmentActivity implements OnMapReadyCall
         AppCompatButton back = findViewById(R.id.getPlace_back);
         AppCompatButton set = findViewById(R.id.setAddress);
         address = findViewById(R.id.address);
-        //ВЫор места по адресу
+        //Выбор места по адресу
         set.setOnClickListener(view -> {
             try {
                 String tmp = address.getText().toString();
@@ -53,11 +53,11 @@ public class GetPlaceActivity extends FragmentActivity implements OnMapReadyCall
                 }
                 if (map != null) {
                     map.clear();
-                    map.addMarker(new MarkerOptions().position(position).title("выбранное место"));
+                    map.addMarker(new MarkerOptions().position(position).title("Выбранное место"));
                 }
             } catch (Exception e) {
                 done = false;
-                Toast.makeText(getApplicationContext(), "ошибка с адресом", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Ошибка при работе с адресом", Toast.LENGTH_SHORT).show();
             }
         });
         //Настройка кнопок
@@ -91,7 +91,7 @@ public class GetPlaceActivity extends FragmentActivity implements OnMapReadyCall
                 tmp = AddressService.getAddress(latLng.latitude, latLng.longitude, getApplicationContext());
                 if (!tmp.isEmpty()) {
                     map.clear();
-                    map.addMarker(new MarkerOptions().position(latLng).title("выбранное место"));
+                    map.addMarker(new MarkerOptions().position(latLng).title("Выбранное место"));
                     done = true;
                     position = latLng;
                     address.setText(tmp);
@@ -99,7 +99,7 @@ public class GetPlaceActivity extends FragmentActivity implements OnMapReadyCall
                 }
             } catch (Exception e) {
                 done = false;
-                Toast.makeText(getApplicationContext(), "ошибка при обработке координат", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Ошибка при обработке координат", Toast.LENGTH_SHORT).show();
             }
         });
         map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(55.7, 37.6)));

@@ -20,6 +20,7 @@ public class CommentController {
     private final CommentService commentService;
     private final UserService userService;
 
+    // Создание комментария
     @PostMapping("/events/comment/new")
     public List<CommentDto> createNewComment(
             @RequestParam String content,
@@ -36,6 +37,7 @@ public class CommentController {
         }
     }
 
+    // Получение комментариев к мероприятию по айди мероприятия
     @GetMapping("/events/{id}/comments")
     public List<CommentDto> getCommentsByBookId(@PathVariable int id) {
         try {

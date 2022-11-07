@@ -12,6 +12,8 @@ import com.example.test.event_showcase.RegistrationFragmentUser;
 import com.example.test.event_showcase.ShowCaseFragment;
 import com.example.test.event_showcase.ShowCaseMap;
 
+
+// Интерфейс, описыващий методы работы с серверной частью
 public interface ServerInterface {
     void insertEvent(Event e, Context context);
 
@@ -33,7 +35,7 @@ public interface ServerInterface {
 
     void login(String login, String password, Context context);
 
-    void findByLength(long length, double x, double y, Context context, MapFragment mapFragment);
+    void findByLength(long length,  Context context, MapFragment mapFragment);
 
     void register(String login, String password, String username, Context context);
 

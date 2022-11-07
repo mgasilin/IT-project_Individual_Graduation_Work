@@ -30,7 +30,7 @@ public class GetPositionFragment extends Fragment {
     private LatLng position;
     private GoogleMap map;
 
-    //Создание и настройка карты
+    //Создание и настройка карты. Вызывается как только карта будет готова к использованию.
     private final OnMapReadyCallback callback = new OnMapReadyCallback() {
 
         @Override

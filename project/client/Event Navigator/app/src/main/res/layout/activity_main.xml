@@ -76,6 +76,7 @@
         android:background="@drawable/ic_light_theme_light_blue_rect_huge"
         android:gravity="center"
         android:hint="Логин"
+        android:maxLength="50"
         android:textColor="@color/dark_text_color"
         android:textColorHint="@color/dark_text_color"
         app:layout_constraintEnd_toEndOf="@+id/entryGuidelineRight"
@@ -95,6 +96,7 @@
         app:layout_constraintTop_toBottomOf="@+id/entry_login" />
 
     <EditText
+        android:maxLength="50"
         android:textSize="20sp"
         android:id="@+id/entry_password"
         android:layout_width="0dp"

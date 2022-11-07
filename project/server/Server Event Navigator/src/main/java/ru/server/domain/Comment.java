@@ -15,6 +15,7 @@ import javax.persistence.*;
 @Table(name = "comments")
 public class Comment {
 
+    // Поля класса
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

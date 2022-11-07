@@ -15,16 +15,19 @@ public class UserController {
     // Сервис для работы с пользователями
     private final UserService userService;
 
+    // Получение пользователя по айди
     @GetMapping("/user/{id}")
     public UserDto getUser(@PathVariable int id){
         return UserDto.toDto(userService.getById(id));
     }
 
+    // Проверка попытки входа в систему
     @GetMapping("/user/login")
     public LoginDto login(@RequestParam String login, @RequestParam String password){
         return userService.login(login,password);
     }
 
+    // Проверка попыток регистрации нового пользователя.
     @GetMapping("/user/register")
     public LoginDto register(@RequestParam String login, @RequestParam String password, @RequestParam String username){
         return  userService.register(login,password,username);

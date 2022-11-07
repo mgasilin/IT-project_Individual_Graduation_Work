@@ -23,6 +23,7 @@ import com.example.test.location_service.GetPlaceActivity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 
@@ -85,7 +86,7 @@ public class NewEventActivity extends AppCompatActivity {
                 return false;
             }
             long millis = actual_date.getTime();
-            if (millis - time > 0 && year < 2032) {
+            if (millis - time > 0 && year<=Calendar.getInstance().get(Calendar.YEAR)+1) {
                 return true;
             } else {
                 Toast.makeText(getApplicationContext(), "Похоже, вы указали уже прошедшую дату, либо дату слишком наперед", Toast.LENGTH_SHORT).show();
@@ -210,6 +211,8 @@ public class NewEventActivity extends AppCompatActivity {
 
     }
 
+
+    // Обработка результата активности задания адреса
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -226,7 +229,7 @@ public class NewEventActivity extends AppCompatActivity {
                     couldBeCreated[0] = true;
                     addressText.setText(place[0]);
                 } else {
-                    Toast.makeText(getApplicationContext(), "ошибка при передаче, попробуйте снова", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Ошибка при передаче, попробуйте снова", Toast.LENGTH_SHORT).show();
                 }
             }
         }

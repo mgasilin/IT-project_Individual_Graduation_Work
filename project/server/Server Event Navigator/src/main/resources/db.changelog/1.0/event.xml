@@ -5,7 +5,7 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <changeSet id="2022-13-05--event" author="mgasilin">
+    <changeSet id="event" author="mgasilin">
 
         <!-- Проверяем нет ли уже таблицы с таким названием -->
         <preConditions onFail="MARK_RAN">
@@ -32,7 +32,7 @@
                 <constraints nullable="false"/>
             </column>
 
-            <column name="date" type="VARCHAR(50)">
+            <column name="date" type="VARCHAR(10)">
                 <constraints nullable="false"/>
             </column>
 
@@ -43,35 +43,35 @@
                 <constraints nullable="false" foreignKeyName="fk_user_id"  references="users(id)"/>
             </column>
             
-            <column name="street_event" type="NUMERIC">
+            <column name="street_event" type="NUMERIC(2,0)">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="group_event" type="NUMERIC">
+            <column name="group_event" type="NUMERIC(2,0)">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="free_event" type="NUMERIC">
+            <column name="free_event" type="NUMERIC(2,0)">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="family_event" type="NUMERIC">
+            <column name="family_event" type="NUMERIC(2,0)">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="sport_event" type="NUMERIC">
+            <column name="sport_event" type="NUMERIC(2,0)">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="event_with_covid_restrictions" type="NUMERIC">
+            <column name="event_with_covid_restrictions" type="NUMERIC(2,0)">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="event_with_age_restrictions" type="NUMERIC">
+            <column name="event_with_age_restrictions" type="NUMERIC(2,0)">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="event_with_registration" type="NUMERIC">
+            <column name="event_with_registration" type="NUMERIC(2,0)">
                 <constraints nullable="false"/>
             </column>
 
@@ -83,15 +83,15 @@
                 <constraints nullable="false"/>
             </column>
 
-            <column name="registration" type="NUMERIC">
+            <column name="registration" type="NUMERIC(2,0)">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="lim" type="NUMERIC">
+            <column name="lim" type="NUMERIC(19,0)">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="has_limit" type="NUMERIC">
+            <column name="has_limit" type="NUMERIC(2,0)">
                 <constraints nullable="false"/>
             </column>
 

@@ -33,17 +33,19 @@ public class UsualEventRvAdapter extends RecyclerView.Adapter<UsualEventRvAdapte
     List<Event> events;
     CustomItemClickListener listener;
 
-
+    // Конструктор класса
     public UsualEventRvAdapter(List<Event> events, CustomItemClickListener listener) {
         this.events = events;
         this.listener = listener;
     }
 
+    // Удаляет мероприятие из списка
     public void removeEvent(int position, Context c) {
         Server.removeEvent(events.get(position), c);
         events.remove(position);
     }
 
+    /* Методы, отвечающие за первоначальную настройку RecyclerView */
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
@@ -63,11 +65,13 @@ public class UsualEventRvAdapter extends RecyclerView.Adapter<UsualEventRvAdapte
         eventViewHolder.eventPlace.setText(events.get(i).getPlace());
     }
 
+    // Получение количества элементов в отображаемом списке
     @Override
     public int getItemCount() {
         return events.size();
     }
 
+    // Замена списка отображаемых мероприятий на иной
     public void setEvents(List<Event> events) {
         this.events = events;
     }

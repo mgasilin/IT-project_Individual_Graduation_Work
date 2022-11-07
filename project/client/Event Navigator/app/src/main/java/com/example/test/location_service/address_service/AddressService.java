@@ -53,7 +53,7 @@ public class AddressService {
         double lat_first = first.latitude;
         double lng_first = first.longitude;
         double lat_second = second.latitude;
-        double lng_second = first.longitude;
+        double lng_second = second.longitude;
         Location locationFirst = new Location("point A");
         locationFirst.setLatitude(lat_first);
         locationFirst.setLongitude(lng_first);

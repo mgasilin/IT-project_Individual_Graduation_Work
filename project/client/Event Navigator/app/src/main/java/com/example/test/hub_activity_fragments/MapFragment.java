@@ -46,6 +46,7 @@ public class MapFragment extends Fragment {
     private List<Event> eventsCat = new ArrayList<>();
     private int search_len = 0;
     double start_position_lat;
+    double x,y;
     double start_position_lng;
     private SeekBar length;
     private CheckBox apply_categories, searchByLength;
@@ -80,7 +81,10 @@ public class MapFragment extends Fragment {
         }
     }
 
-    public void updateLen(List<Event> events, double x, double y, int length) {
+    public void updateLen(List<Event> events,  int length) {
+        SharedPreferences preferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+        x = Double.parseDouble(preferences.getString("start_lat", "57.333"));
+        y = Double.parseDouble(preferences.getString("start_lng", "37.333"));
         ArrayList<Event> eventLen = new ArrayList<>();
         for (Event e : events) {
             if (AddressService.getDistance(new LatLng(x, y), new LatLng(e.getX(), e.getY())) <= length) {
@@ -136,7 +140,7 @@ public class MapFragment extends Fragment {
             googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Double.parseDouble(getActivity()
                     .getPreferences(Context.MODE_PRIVATE).getString("start_lat", "57.333")), Double.parseDouble(getActivity().
                     getPreferences(Context.MODE_PRIVATE).getString("start_lng", "37.333"))), 9.0f));
-            //Насктойка нажатий на маркер
+            //Настройка нажатий на маркер
             map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                 @Override
                 public boolean onMarkerClick(Marker marker) {
@@ -180,25 +184,25 @@ public class MapFragment extends Fragment {
         //Первоначльное заполнение карты
         if (length_search[0] && apply_cats[0]) {
             Server.getByCategories(getActivity(), getActivity().getPreferences(0), id, MapFragment.this);
-            Server.findByLength(search_len, getActivity().getPreferences(0), getActivity(), MapFragment.this);
+            Server.findByLength(search_len, getActivity(), MapFragment.this);
             state = 3;
         } else if (length_search[0]) {
-            Server.findByLength(search_len, getActivity().getPreferences(0), getActivity(), MapFragment.this);
+            Server.findByLength(search_len,  getActivity(), MapFragment.this);
             state = 1;
         } else {
             Server.getByCategories(getActivity(), getActivity().getPreferences(0), id, MapFragment.this);
             state = 2;
         }
-        //Настройка смены выида поиска
+        //Настройка смены вида поиска
         CompoundButton.OnCheckedChangeListener listener = (compoundButton, b) -> {
             length_search[0] = searchByLength.isChecked();
             apply_cats[0] = apply_categories.isChecked();
             if (length_search[0] && apply_cats[0]) {
                 Server.getByCategories(getActivity(), getActivity().getPreferences(0), id, MapFragment.this);
-                Server.findByLength(search_len, getActivity().getPreferences(0), getActivity(), MapFragment.this);
+                Server.findByLength(search_len, getActivity(), MapFragment.this);
                 state = 3;
             } else if (length_search[0]) {
-                Server.findByLength(search_len, getActivity().getPreferences(0), getActivity(), MapFragment.this);
+                Server.findByLength(search_len,  getActivity(), MapFragment.this);
                 state = 1;
             } else {
                 Server.getByCategories(getActivity(), getActivity().getPreferences(0), id, MapFragment.this);
@@ -234,10 +238,10 @@ public class MapFragment extends Fragment {
                 boolean apply_cats = apply_categories.isChecked();
                 if (length_search && apply_cats) {
                     Server.getByCategories(getActivity(), getActivity().getPreferences(0), id, MapFragment.this);
-                    Server.findByLength(search_len, getActivity().getPreferences(0), getActivity(), MapFragment.this);
+                    Server.findByLength(search_len,  getActivity(), MapFragment.this);
                     state = 3;
                 } else if (length_search) {
-                    Server.findByLength(search_len, getActivity().getPreferences(0), getActivity(), MapFragment.this);
+                    Server.findByLength(search_len,  getActivity(), MapFragment.this);
                     state = 1;
                 } else {
                     Server.getByCategories(getActivity(), getActivity().getPreferences(0), id, MapFragment.this);
@@ -290,9 +294,9 @@ public class MapFragment extends Fragment {
             //Подбор мероприятий в зависимости от типа поиска
             if (state == 3) {
                 Server.getByCategories(getActivity(), getActivity().getPreferences(0), id, MapFragment.this);
-                Server.findByLength(search_len, getActivity().getPreferences(0), getActivity(), MapFragment.this);
+                Server.findByLength(search_len,  getActivity(), MapFragment.this);
             } else if (state == 1) {
-                Server.findByLength(search_len, getActivity().getPreferences(0), getActivity(), MapFragment.this);
+                Server.findByLength(search_len,  getActivity(), MapFragment.this);
             } else {
                 Server.getByCategories(getActivity(), getActivity().getPreferences(0), id, MapFragment.this);
             }

@@ -43,7 +43,7 @@ public class EventServiceImpl implements EventService {
     @Override
     public List<Event> searchByName(String name) {
         List<Event> events = eventDao.findAll();
-        List<Event> result= new ArrayList<>();
+        List<Event> result = new ArrayList<>();
         for (Event e : events) {
             if (e.getName().contains(name)) {
                 result.add(e);
@@ -123,11 +123,13 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public void updateSettings(int id, boolean has_limit, int limit, boolean register) {
-        Event event = eventDao.getById(id);
-        event.setLimit(limit);
-        event.setHas_limit(has_limit ? 1 : 0);
-        event.setRegistration(register ? 1 : 0);
-        eventDao.save(event);
+        if (eventDao.existsById(id)) {
+            Event event = eventDao.getById(id);
+            event.setLimit(limit);
+            event.setHas_limit(has_limit ? 1 : 0);
+            event.setRegistration(register ? 1 : 0);
+            eventDao.save(event);
+        }
     }
 
     @Override
